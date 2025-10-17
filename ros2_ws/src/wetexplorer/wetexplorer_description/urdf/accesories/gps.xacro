@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="gps">
+
+  <link name="gps_frame_link">
+    <inertial>
+      <origin
+        xyz="0.105414522198745 2.11113479880442E-16 0.42142097837912"
+        rpy="0 0 0" />
+      <mass
+        value="0.404841115087331" />
+      <inertia
+        ixx="0.00762661855296656"
+        ixy="-8.51690952924258E-21"
+        ixz="6.70526492376864E-17"
+        iyy="0.00157192564919616"
+        iyz="4.79291022859442E-17"
+        izz="0.00612638819392862" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wetexplorer_description/meshes/extra/gps_frame_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://WetExplorer/meshes/gps_frame_link.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+  
+  <joint name="gps_frame_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="gps_frame_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+ 
+  <link
+    name="gps_link">
+    <inertial>
+      <origin
+        xyz="-2.23672210816483E-05 -0.2865087525775 0.00451065274111317"
+        rpy="0 0 0" />
+      <mass
+        value="0.236596279105962" />
+      <inertia
+        ixx="0.000153435356186975"
+        ixy="5.16572317628455E-11"
+        ixz="-3.22977757581418E-08"
+        iyy="0.000150409946833309"
+        iyz="-1.25336119132743E-11"
+        izz="0.000290224818991714" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wetexplorer_description/meshes/extra/gps_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.780392156862745 0.76078431372549 0.741176470588235 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://WetExplorer/meshes/gps_link.STL" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint name="gps_joint"
+    type="fixed">
+    <origin
+      xyz="0.10541 0.28651 0.53942"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="gps_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+
+
+
+  <link
+    name="gps">
+  </link>
+  
+  <joint name="gps_joint2"
+    type="fixed">
+    <origin
+      xyz="00.10541 0.3 0.53942"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="gps" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <gazebo reference="gps_frame_link">
+      <material>Gazebo/LightGrey</material>
+      
+  </gazebo>
+
+  <gazebo reference="gps_link">
+      <material>Gazebo/Black</material>
+      <sensor name="gps_sensor" type="gps">
+        <always_on>1</always_on>
+        <update_rate>5.0</update_rate>
+        <topic>navsat/fix</topic>
+        <gz_frame_id>base_link</gz_frame_id>
+        <gps>
+          <position_sensing>
+            <horizontal>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00000001</stddev>
+              </noise>
+            </horizontal>
+            <vertical>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00000001</stddev>
+              </noise>
+            </vertical>
+          </position_sensing>
+        </gps>
+      </sensor>
+
+       <sensor name="gps_sensor_truth" type="gps">
+        <always_on>1</always_on>
+        <update_rate>50.0</update_rate>
+        <topic>gps/ref</topic>
+        <gz_frame_id>base_link</gz_frame_id>
+        <gps>
+          <position_sensing>
+            <horizontal>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0000000</stddev>
+              </noise>
+            </horizontal>
+            <vertical>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0000000</stddev>
+              </noise>
+            </vertical>
+          </position_sensing>
+        </gps>
+      </sensor>
+  </gazebo>
+
+
+
+
+
+</robot>
