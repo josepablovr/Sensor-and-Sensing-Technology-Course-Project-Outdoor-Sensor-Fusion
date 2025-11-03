@@ -162,11 +162,71 @@ ros2 run plotjuggler plotjuggler
 
 ---
 
-## ✅ Summary
+## wetexplorer_sensors – IMU Processing Template
 
-You are now ready to:
-- Build and launch the WetExplorer simulation
-- Visualize the robot and sensor data in RViz
-- Plot and analyze IMU data in RQT Plot or PlotJuggler
+The `wetexplorer_sensors` package is a ready-to-use ROS 2 module designed to process IMU data. It already contains all the setup required to receive IMU messages from the robot, process them, and republish the results. Inside this package, the main file is located at:
 
-Enjoy exploring sensor fusion and visualization tools in ROS 2! 🚀
+
+
+### Where the script is
+```
+ros2_ws/src/wetexplorer_sensors/wetexplorer_sensors/imu_processing_node.py
+```
+Inside this file, only modify the function:
+```python
+def imu_callback(self, msg: Imu):
+    # -------- algorithm goes here --------
+```
+This node is a normal Python class. If needed, add your own members, helper functions, or parameters elsewhere in the class. The subscription and publication wiring is already set up.
+
+---
+
+## Build the package
+
+Every time you modify the script, rebuild:
+
+```bash
+colcon build
+# or, to build only this package:
+colcon build --packages-select wetexplorer_sensors
+```
+
+Source the workspace if you opened a new shell:
+
+```bash
+source install/setup.bash
+```
+
+---
+
+## Run the node
+
+Open a new terminal inside the container or your ROS 2 environment:
+
+```bash
+ros2 run wetexplorer_sensors imu_processing_node
+```
+
+Use the plotting tools described earlier (PlotJuggler) to verify outputs, e.g. angular velocities, linear accelerations, and orientation signals.
+
+---
+
+## Recording and replaying data (rosbag)
+
+Reference: https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.html
+
+Choose a folder for your data:
+```bash
+cd /ros2_ws/src/data
+```
+Recording:
+```bash
+ros2 bag record -o robot_not_moving /imu/data
+# General form:
+# ros2 bag record -o {file_name} {topics...}
+```
+Playback:
+```bash
+ros2 bag play robot_not_moving
+# General form:
+# ros2 bag play {file_name}
