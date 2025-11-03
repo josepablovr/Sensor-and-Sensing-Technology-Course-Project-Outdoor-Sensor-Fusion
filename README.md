@@ -170,7 +170,7 @@ The `wetexplorer_sensors` package is a ready-to-use ROS 2 module designed to pro
 
 ### Where the script is
 ```
-ros2_ws/src/wetexplorer_sensors/wetexplorer_sensors/imu_processing_node.py
+ros2_ws/src/wetexplorer/wetexplorer_sensors/wetexplorer_sensors/imu_processing_node.py
 ```
 Inside this file, only modify the function:
 ```python
