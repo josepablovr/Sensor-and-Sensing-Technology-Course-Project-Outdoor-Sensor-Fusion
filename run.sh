@@ -23,7 +23,6 @@ if docker ps --filter "name=${CONTAINER_NAME}" --format "{{.Names}}" | grep -q "
 else
     echo "🚀 Starting new container '${CONTAINER_NAME}' using workspace: ${WORKSPACE_DIR}"
     docker run --rm --name "${CONTAINER_NAME}" -it \
-        --gpus all \
         --user "${USER_NAME}" \
         --network=host --ipc=host \
         -v /tmp/.X11-unix:/tmp/.X11-unix:rw --env=DISPLAY \
