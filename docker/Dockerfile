@@ -8,8 +8,8 @@ SHELL ["/bin/bash", "-c"]
 
 
 
-RUN sudo rm /etc/apt/sources.list.d/ros2-latest.list
-RUN sudo rm /usr/share/keyrings/ros2-latest-archive-keyring.gpg
+#RUN sudo rm /etc/apt/sources.list.d/ros2-latest.list
+#RUN sudo rm /usr/share/keyrings/ros2-latest-archive-keyring.gpg
 
 RUN sudo apt update && sudo apt install -y curl ca-certificates
 RUN set -e \
