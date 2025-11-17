@@ -21,6 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             'imu_processing_node = wetexplorer_sensors.imu_processing_node:main',
+            'odometry_real = wetexplorer_sensors.odometry_real:main',
+            'odometry_sim = wetexplorer_sensors.odometry_sim:main',
         ],
 },
 )
