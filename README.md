@@ -230,3 +230,60 @@ Playback:
 ros2 bag play robot_not_moving
 # General form:
 # ros2 bag play {file_name}
+```
+
+---
+
+## wetexplorer_sensors – Forward Kinematics Template
+
+Inside 'wetexplorer_sensors` package, the main file is located at:
+
+
+
+### Where the script is
+```
+ros2_ws/src/wetexplorer/wetexplorer_sensors/wetexplorer_sensors/odometry_real.
+ros2_ws/src/wetexplorer/wetexplorer_sensors/wetexplorer_sensors/odometry_sim.py
+```
+There are two nodes since the real robot publishes the angular velocities of the sprockets as a string, which is not the standard for the simulation. Since we have different types of messages we need to handle the simulation script differently at the beginning. However, the algorithm block you paste in each script should be the same. Try it in the simualtion first and then we will test it with real data.
+
+---
+
+## Build the package
+
+Every time you modify the script, rebuild:
+
+```bash
+colcon build
+# or, to build only this package:
+colcon build --packages-select wetexplorer_sensors
+```
+
+Source the workspace if you opened a new shell:
+
+```bash
+source install/setup.bash
+```
+
+---
+
+## Run the node
+
+Open a new terminal inside the container or your ROS 2 environment:
+
+```bash
+ros2 run wetexplorer_sensors odometry_sim
+```
+or
+
+```bash
+ros2 run wetexplorer_sensors odometry_real
+```
+
+You can debug this node by plotting Vx vs time and Omega vs time. Also X pos vs Y pos. For that, use Plotjuggler.
+
+
+f you want to get more familiar with the kinematic modeling this node is based on, check out the section 3.2.2 Forward kinematic models in the book "Introduction to Autonomous Mobile Robots":
+https://www.ucg.ac.me/skladiste/blog_13268/objava_56689/fajlovi/Introduction%20to%20Autonomous%20Mobile%20Robots%20book.pdf
+
+---
